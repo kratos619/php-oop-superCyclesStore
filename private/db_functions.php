@@ -23,4 +23,12 @@ if($connection->connect_errno){
 
 }
 
+function db_disconnect($connection){
+    if(isset($connection)){
+        $connection->close();
+    }
+
+
+}
+
 ?>
