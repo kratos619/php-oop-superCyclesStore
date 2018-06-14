@@ -27,6 +27,17 @@ static public function find_by_sql($sql){
       return self::find_by_sql($sql);
   }
 
+  static public function find_by_id($id){
+    $sql = "select * from bicycles ";
+    $sql .= "where id='" . self::$database->escape_string($id) . "'";
+    $object_array = self::find_by_sql($sql);
+    if (!empty($object_array)){
+      return array_shift($object_array);
+    }else{
+      return false;
+    }
+  }
+
   static protected function instantiate($record){
     $object = new self;
 
@@ -37,6 +48,7 @@ static public function find_by_sql($sql){
     }
     return $object;
   }
+
 
   public $id;
   public $brand;
