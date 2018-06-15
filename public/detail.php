@@ -3,8 +3,12 @@
 <?php
 
   // Get requested ID
-
+$id = $_GET['id'] ?? false;
+if (!$id){
+    redirect_to('bicycles.php');
+}
   // Find bicycle using ID
+$bike = Bicycle::find_by_id($id);
 
 ?>
 
