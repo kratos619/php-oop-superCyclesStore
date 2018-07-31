@@ -40,10 +40,12 @@ static public function find_by_sql($sql){
 
   static protected function instantiate($record){
     $object = new self;
+    
 
     foreach ($record as $property => $value){
       if(property_exists($object ,$property)){
         $object->$property = $value;
+        
       }
     }
     return $object;
