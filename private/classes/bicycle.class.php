@@ -30,8 +30,14 @@ static public function find_by_sql($sql){
   static public function find_by_id($id){
     $sql = "select * from bicycles ";
     $sql .= "where id='" . self::$database->escape_string($id) . "'";
-    $object_array = self::find_by_sql($sql);
+    $object_array = self::find_by_sql($sql); 
     if (!empty($object_array)){
+    //Remove the first element (id) from an array, and return the value of the removed element:
+    //$a=array("a"=>"red","b"=>"green","c"=>"blue");
+    // echo array_shift($a);
+    // print_r ($a);
+    //output red
+    //Array ( [b] => green [c] => blue )
       return array_shift($object_array);
     }else{
       return false;
