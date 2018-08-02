@@ -40,7 +40,7 @@ static public function find_by_sql($sql){
     //Array ( [b] => green [c] => blue )
       return array_shift($object_array);
     }else{
-      return false;
+      redirect_to('index.php');
     }
   }
 
