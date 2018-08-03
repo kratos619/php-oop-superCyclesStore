@@ -3,7 +3,7 @@
 class Bicycle {
 
   static protected $database;
-
+static protected $db_columnn=['id','brand','model','year','category','color','description','gender','price','weight_kg','condition_id'];
   static public function set_database($database){
     self::$database = $database;
   }
@@ -55,6 +55,29 @@ static public function find_by_sql($sql){
       }
     }
     return $object;
+  }
+
+  public function create(){
+    $attributes = $this->attribute();
+    $sql = "INSERT INTO bicycles (";
+    $sql .= join(', ',array_keys($attributes)) ;
+    $sql .= ") values('";
+    $sql .= join("', '",array_values($attributes));
+    $sql .= "')"; 
+    $result = self::$database->query($sql);
+    if($result){
+      $this->id = self::$database->insert_id;
+    }
+    return $result;
+  }
+
+  public function attribute(){
+    $attributes =[];
+    foreach(self::$db_columnn as $column){
+      if($column == 'id'){continue;}
+      $attributes[$column] = $this->$column;
+    }
+    return $attributes;
   }
 
 
